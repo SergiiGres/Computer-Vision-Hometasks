@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 
 from matplotlib import pyplot as plt
+
 plt.rcParams['figure.figsize'] = [10, 5]
 
 img = cv2.imread('data/kodim21.png')
