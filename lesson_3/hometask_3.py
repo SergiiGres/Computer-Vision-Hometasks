@@ -24,7 +24,7 @@ plt.show()
 
 # Apply USM to get the resulting image using `sharpened = original + (original − unsharp) × amount`
 # Note: Again, take care of underflows/overflows if necessary.
-diff_small = np.copy(diff)
+diff_small = diff.copy()
 for channel in range(3):
     diff_small[..., channel] = np.minimum(diff[..., channel] * 0.1, 255)
 sharpened = cv2.add(img, diff_small)
@@ -32,7 +32,7 @@ plt.subplot(121), plt.imshow(img)
 plt.subplot(122), plt.imshow(sharpened)
 plt.show()
 
-diff_normal = np.copy(diff)
+diff_normal = diff.copy()
 for channel in range(3):
     diff_normal[..., channel] = np.minimum(diff[..., channel] * 1.5, 255)
 sharpened = cv2.add(img, diff_normal)
@@ -40,7 +40,7 @@ plt.subplot(121), plt.imshow(img)
 plt.subplot(122), plt.imshow(sharpened)
 plt.show()
 
-diff_high = np.copy(diff)
+diff_high = diff.copy()
 for channel in range(3):
     diff_high[..., channel] = np.minimum(diff[..., channel] * 10, 255)
 sharpened = cv2.add(img, diff_high)
