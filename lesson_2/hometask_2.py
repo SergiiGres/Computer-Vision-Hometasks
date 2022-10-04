@@ -63,12 +63,14 @@ def scale_by_max(image):
     max_g = np.max(green)
     max_b = np.max(blue)
 
-    red = red / max_r
-    green = green / max_g
-    blue = blue / max_b
+    # Apply scale-by-max balancing and generate the balanced image
+    result = np.zeros_like(img, dtype=np.float32)
+    result[..., 0] = 255 * (img[..., 0] / max_r)
+    result[..., 1] = 255 * (img[..., 1] / max_g)
+    result[..., 2] = 255 * (img[..., 2] / max_b)
 
-    # Apply color balancing and generate the balanced image
-    result = cv2.merge([red, green, blue])
+    result = result / 255
+    result[result > 1] = 1
 
     return result
 
@@ -78,7 +80,7 @@ white_patch()
 
 # Gray world
 # Load your image
-img = cv2.imread('data/dark.png')
+img = cv2.imread('data/test.jpeg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 balanced = grey_world(img)
 # Show the original and the balanced image side by side
@@ -88,7 +90,7 @@ plt.show()
 
 # Scale-by-max
 # Load your image
-img = cv2.imread('data/dark.png')
+img = cv2.imread('data/test.jpeg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 balanced = scale_by_max(img)
 
