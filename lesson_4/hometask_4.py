@@ -62,7 +62,7 @@ for line in lines:
     theta = line[1]
     line_angle = (theta * 180) / math.pi
     # Keep line if theta is not horizontal
-    if 60 > line_angle > 30 or 150 > line_angle > 120:
+    if 30 <= line_angle <= 60 or 120 <= line_angle <= 150:
         filtered_lines.append(line)
 # Let's plot the resulting filtered lines
 result = np.copy(img)
@@ -83,5 +83,33 @@ for line in filtered_lines:
     cv2.line(result, pt1, pt2, 255, 1, cv2.LINE_AA)
 
 plt.subplot(121), plt.imshow(edges, cmap='gray'), plt.title('Edge map')
-plt.subplot(122), plt.imshow(result, cmap='gray'), plt.title('Hough lines. Lines count {}'.format(len(lines)))
+plt.subplot(122), plt.imshow(result, cmap='gray'), plt.title('Hough lines. Lines count {}'.format(len(filtered_lines)))
+plt.show()
+
+# We will apply k-means clustering to refine the detected lines.
+# Don't worry, we will learn about the clustering later in the course :-)
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(n_clusters=len(filtered_lines)).fit(filtered_lines)
+kmeans.cluster_centers_
+# Again, let's plot the resulting filtered lines
+result = np.copy(img)
+
+for line in kmeans.cluster_centers_:
+    rho = line[0]
+    theta = line[1]
+
+    a = math.cos(theta)
+    b = math.sin(theta)
+
+    x0 = a * rho
+    y0 = b * rho
+
+    pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * a))
+    pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * a))
+
+    cv2.line(result, pt1, pt2, 255, 1, cv2.LINE_AA)
+
+plt.subplot(121), plt.imshow(edges, cmap='gray'), plt.title('Edge map')
+plt.subplot(122), plt.imshow(result, cmap='gray'), plt.title('Hough lines. Lines count {}'.format(len(filtered_lines)))
 plt.show()
