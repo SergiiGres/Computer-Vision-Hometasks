@@ -54,7 +54,6 @@ plt.subplot(121), plt.imshow(edges, cmap='gray'), plt.title('Edge map')
 plt.subplot(122), plt.imshow(result, cmap='gray'), plt.title('Hough lines. Lines count {}'.format(len(lines)))
 plt.show()
 
-print(lines)
 # Filter out all lines that are approximately horizontal (+/- 20 degrees).
 filtered_lines = []
 for line in lines:
