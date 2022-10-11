@@ -88,7 +88,7 @@ img = img.astype(np.float64)
 
 # Show quantized image (don't forget to cast back to uint8)
 quantized = simple_quantization(img, colors).astype(np.uint8)
-plt.imshow(quantized)
+plt.imshow(quantized), plt.title('Simple quantization')
 plt.show()
 
 # Compute average quantization error
@@ -100,7 +100,7 @@ img_tmp, dithering = quantization_with_diffusion(img, colors)
 
 img_tmp = img_tmp.astype(np.uint8)
 dithering = dithering.astype(np.uint8)
-plt.subplot(121), plt.imshow(img_tmp)  # optimally quantized
+plt.subplot(121), plt.imshow(img_tmp), plt.title('Black, dark gray, light gray, white')  # optimally quantized
 plt.subplot(122), plt.imshow(dithering)  # dithering
 plt.show()
 
@@ -113,7 +113,7 @@ img_tmp, dithering = quantization_with_diffusion(img, colors)
 
 img_tmp = img_tmp.astype(np.uint8)
 dithering = dithering.astype(np.uint8)
-plt.subplot(121), plt.imshow(img_tmp)  # optimally quantized
+plt.subplot(121), plt.imshow(img_tmp), plt.title('Black and white')  # optimally quantized
 plt.subplot(122), plt.imshow(dithering)  # dithering
 plt.show()
 
@@ -130,6 +130,6 @@ img_tmp, dithering = quantization_with_diffusion(img, colors)
 # Show quantized image (don't forget to cast back to uint8)
 img_tmp = img_tmp.astype(np.uint8)
 dithering = dithering.astype(np.uint8)
-plt.subplot(121), plt.imshow(img_tmp)  # optimally quantized
+plt.subplot(121), plt.imshow(img_tmp), plt.title('Optimally quantized')  # optimally quantized
 plt.subplot(122), plt.imshow(dithering)  # dithering
 plt.show()
