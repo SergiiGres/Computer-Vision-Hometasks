@@ -104,6 +104,10 @@ plt.subplot(121), plt.imshow(img_tmp), plt.title('Black, dark gray, light gray, 
 plt.subplot(122), plt.imshow(dithering)  # dithering
 plt.show()
 
+# Compute average quantization error
+avg_quant_error = np.mean(np.subtract(img_tmp, dithering))
+print(avg_quant_error)
+
 # Black and white
 colors = np.array([[0, 0, 0],
                    [255, 255, 255]])
@@ -117,8 +121,9 @@ plt.subplot(121), plt.imshow(img_tmp), plt.title('Black and white')  # optimally
 plt.subplot(122), plt.imshow(dithering)  # dithering
 plt.show()
 
-# Compute average quantization error for dithered image
-avg_dith_error = np.mean(np.subtract(quantized, dithering))
+# Compute average quantization error
+avg_quant_error = np.mean(np.subtract(img_tmp, dithering))
+print(avg_quant_error)
 
 from sklearn.cluster import KMeans
 
@@ -130,6 +135,26 @@ img_tmp, dithering = quantization_with_diffusion(img, colors)
 # Show quantized image (don't forget to cast back to uint8)
 img_tmp = img_tmp.astype(np.uint8)
 dithering = dithering.astype(np.uint8)
-plt.subplot(121), plt.imshow(img_tmp), plt.title('Optimally quantized')  # optimally quantized
+plt.subplot(121), plt.imshow(img_tmp), plt.title('Optimally quantized: 4 colors')  # optimally quantized
 plt.subplot(122), plt.imshow(dithering)  # dithering
 plt.show()
+
+# Compute average quantization error
+avg_quant_error = np.mean(np.subtract(img_tmp, dithering))
+print(avg_quant_error)
+
+kmeans = KMeans(n_clusters=32).fit(np.reshape(img, (-1, 1)))
+colors = kmeans.cluster_centers_
+
+img_tmp, dithering = quantization_with_diffusion(img, colors)
+
+# Show quantized image (don't forget to cast back to uint8)
+img_tmp = img_tmp.astype(np.uint8)
+dithering = dithering.astype(np.uint8)
+plt.subplot(121), plt.imshow(img_tmp), plt.title('Optimally quantized: 32 colors')  # optimally quantized
+plt.subplot(122), plt.imshow(dithering)  # dithering
+plt.show()
+
+# Compute average quantization error
+avg_quant_error = np.mean(np.subtract(img_tmp, dithering))
+print(avg_quant_error)
