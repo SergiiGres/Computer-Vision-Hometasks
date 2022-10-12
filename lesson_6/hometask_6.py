@@ -119,6 +119,9 @@ out = cv2.circle(img, opt_top_right, 3, (255, 0, 0), -1)
 out = cv2.circle(img, opt_bottom_left, 3, (255, 0, 0), -1)
 out = cv2.circle(img, opt_bottom_right, 3, (255, 0, 0), -1)
 
+# out = cv2.drawMarker(img,opt_top_left,(255,0,0),cv2.MARKER_SQUARE ,20,1,cv2.LINE_AA)
+# out = cv2.drawMarker(img,opt_top_left,(255,0,0),cv2.MARKER_CROSS ,20,1,cv2.LINE_AA)
+
 # And finally we plot the images (with the detected document corners)
 plt.subplot(121), plt.imshow(out)
 plt.subplot(122), plt.imshow(cornerness)
