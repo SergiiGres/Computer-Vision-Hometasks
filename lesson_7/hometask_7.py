@@ -53,14 +53,14 @@ plt.show()
 # Define the matrix of source points corresponding to the 4 document corners.
 # The matrix shall have shape (4, 2), i.e., 4 corners x 2 coordinates
 # Note: You will need to explicitly use float32 data type
-src = np.array([top_left, top_right, bottom_left, bottom_right], dtype=np.float32)
+src = np.array([top_left, bottom_left, top_right, bottom_right], dtype=np.float32)
 print("Source corners: {}:".format(src))
 
 # Define the matrix of target (destination) points corresponding to the 4 image corners.
 # The matrix shall have shape (4, 2), i.e., 4 corners x 2 coordinates
 # Note: You will need to explicitly use float32 data type
 # Note2: The order of points in src and dst must be the same
-dst = np.array([[0, 0], [0, cols], [rows, 0], [rows, cols]], dtype=np.float32)
+dst = np.array([[0, 0], [0, rows], [cols, 0], [cols, rows]], dtype=np.float32)
 print("Destination corners: {}".format(dst))
 
 # Let's first start with the affine transform for document rectification. The affine transform can be analytically
@@ -73,7 +73,7 @@ M = cv2.getAffineTransform(src[0:3], dst[0:3])
 print("Affine matrix: {}".format(M))
 
 # Build the rectified image using the computed matrix (you'll have to use warpAffine function from OpenCV here)
-rectified = cv2.warpAffine(img, M, (rows, cols))
+rectified = cv2.warpAffine(img, M, (cols, rows))
 
 # Let's plot the results
 plt.subplot(121), plt.imshow(img)
@@ -88,7 +88,7 @@ M = cv2.getAffineTransform(src[1:4], dst[1:4])
 print("Affine matrix: {}".format(M))
 
 # Build the rectified image using the computed matrix (use warpAffine)
-rectified = cv2.warpAffine(img, M, (rows, cols))
+rectified = cv2.warpAffine(img, M, (cols, rows))
 
 # Let's plot the results
 plt.subplot(121), plt.imshow(img)
@@ -108,7 +108,7 @@ print("Affine matrix: {}".format(M))
 print("Inliners: {}".format(inliers))
 
 # Build the rectified image using the computed matrix (use warpAffine)
-rectified = cv2.warpAffine(img, M, (rows, cols))
+rectified = cv2.warpAffine(img, M, (cols, rows))
 
 # Let's plot the results
 plt.subplot(121), plt.imshow(img)
@@ -123,7 +123,7 @@ M = cv2.getPerspectiveTransform(src, dst)
 print("Affine matrix: {}".format(M))
 
 # Build the rectified image using the computed matrix (you'll have to use warpPerspective function from OpenCV)
-rectified = cv2.warpPerspective(img, M, (rows, cols))
+rectified = cv2.warpPerspective(img, M, (cols, rows))
 
 # Let's plot the results
 plt.subplot(121), plt.imshow(img)
