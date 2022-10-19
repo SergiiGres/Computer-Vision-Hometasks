@@ -129,3 +129,10 @@ rectified = cv2.warpPerspective(img, M, (cols, rows))
 plt.subplot(121), plt.imshow(img)
 plt.subplot(122), plt.imshow(rectified)
 plt.show()
+
+# Questions:
+# Q. The affine transform does not seem to be working well in this case. Why?
+#
+# Q. What can you tell me about the values you have obtained for the inliers vector? What does it mean?
+#
+# Q. How does the result from homography look? Does it work well enough?

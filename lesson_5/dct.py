@@ -1,10 +1,12 @@
 # Discrete Cosine Transform
-# In this notebook we will demonstrate the working principle of the DCT and how it can be employed for image compression.
+# In this notebook we will demonstrate the working principle of the DCT and how it can be employed for image
+# compression.
 
 import cv2
 import math
 import numpy as np
 from matplotlib import pyplot as plt
+
 plt.rcParams['figure.figsize'] = [15, 10]
 from scipy.fft import dct, idct
 
@@ -14,13 +16,16 @@ rows, cols = img.shape
 plt.imshow(img, cmap='gray')
 plt.show()
 
+
 # Scipy does not offer 2D DCT implementation but we already know that DCT is a separable transform.
 # So the 2D versionw e can easily write ourselves.
 def dct2(a):
     return dct(dct(a.T).T)
 
+
 def idct2(a):
     return idct(idct(a.T).T)
+
 
 block = np.ones((4, 4), dtype=np.float32)
 print(block)
@@ -46,6 +51,7 @@ def psnr(ref, target):
     error = ref.astype(np.float32) - target.astype(np.float32)
     mse = np.mean(error ** 2)
     return 10 * np.log10((255 ** 2) / mse)
+
 
 # Block-wise 2D DCT Image Transform
 # This operation is the fundamental process for JPEG compression.
