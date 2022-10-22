@@ -21,6 +21,7 @@ y_noise = slope*x_noise + offset + 25*np.random.randn(len(x_noise))
 
 plt.plot(x_data, y_data, 'o'), plt.grid(True)
 plt.plot(x_noise, y_noise, 'o'), plt.grid(True)
+plt.show()
 
 # Mix true (noisy) data and outliers
 x = np.concatenate((x_data, x_noise))
@@ -48,3 +49,4 @@ for idx_alpha in range(len(alpha)):
         cost[idx_offset, idx_alpha] = np.mean(distance(-slope, 1, -offset[idx_offset], x, y))
 
 plt.imshow(np.log(cost), cmap='gray')
+plt.show()

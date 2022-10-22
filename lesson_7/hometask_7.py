@@ -132,7 +132,15 @@ plt.show()
 
 # Questions:
 # Q. The affine transform does not seem to be working well in this case. Why?
-#
+# A. I guess it because it keeps parallelism.
 # Q. What can you tell me about the values you have obtained for the inliers vector? What does it mean?
-#
+# A. According to description found on the internet it is "vector of same length as number of points, indicating which
+#    points are inliers (1-inlier, 0-outlier).", Not sure I understand the meaning of it's values, give me a clue.
+#    The vector looks as below:
+#    [[1]
+#     [1]
+#     [0]
+#     [1]]
 # Q. How does the result from homography look? Does it work well enough?
+# A. It doesn't look good, since the text on picture cannot be read. That probably caused by low quality of original
+# picture.

@@ -46,6 +46,7 @@ plt.plot(np.array(history))
 plt.xlabel('Iteration')
 plt.ylabel('Centroids')
 plt.grid(True)
+plt.show()
 
 # Quantization After finding the centroids, i.e., the best fitting pallette of colours, we quantize the original
 # image to the given palette.
@@ -59,3 +60,5 @@ for r in range(rows):
         result[r, c] = centroids[color_idx]
 plt.subplot(121), plt.imshow(img, cmap='gray')
 plt.subplot(122), plt.imshow(result, cmap='gray')
+plt.show()
+
