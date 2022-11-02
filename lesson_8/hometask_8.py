@@ -70,7 +70,7 @@ for th in range(0, 256):
 
     # Perform the optimization
     if wcv < best_wcv:
-        best = wcv
+        best_wcv = wcv
         opt_th = th
 
 # Print out the optimal threshold found by Otsu algorithm
