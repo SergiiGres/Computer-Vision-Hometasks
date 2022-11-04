@@ -13,14 +13,14 @@ from matplotlib import pyplot as plt
 
 plt.rcParams['figure.figsize'] = [15, 10]
 
-casc_path = '/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/cv2/data' \
-            '/haarcascade_frontalface_default.xml '
+casc_path = 'data/haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(casc_path)
 
-img = cv2.imread('/home/janko/Pictures/janko2.jpg')
+img = cv2.imread('data/face1.jpg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 plt.imshow(img)
+plt.show()
 
 # Viola-Jones Viola-Jones is a classic and powerful algorithm for object detection. It is a sliding window approach
 # that work in cascades and exploits Haar transform (basis functions) to learn object descriptors. It also makes uso
@@ -41,9 +41,11 @@ for (x, y, w, h) in faces:
     faces_img.append(img[y:y + h, x:x + w, :])
 
 plt.imshow(result)
+plt.show()
 
 plt.subplot(121), plt.imshow(result, cmap='gray')
 plt.subplot(122), plt.imshow(faces_img[0])
+plt.show()
 
 # Face Detection via dlib Dlib is a general purpose cross-platform software library that contains many useful tools.
 # In particular, it includes a trained DNN for face detection.
@@ -83,15 +85,16 @@ for rect in rects:
 
 plt.subplot(121), plt.imshow(result), plt.title('Viola-Jones')
 plt.subplot(122), plt.imshow(result_dlib), plt.title('dlib')
+plt.show()
 
 # Facial Landmarks Facial landmarks can be considred as keypoints that define the contours of a face, eyes,
 # nose and mouth. There are many models for facial landmarking, one of the most popular is the 68-point model (
 # https://link.springer.com/article/10.1007/s11554-021-01107-w)
 
 # Load the predictor (you need to download the predictor from an available source)
-predictor = dlib.shape_predictor('/media/janko/DATA/Datasets/shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor('data/shape_predictor_68_face_landmarks.dat')
 
-face = faces_dlib_img[1]
+face = faces_dlib_img[0]
 rows, cols, _ = face.shape
 rect = dlib.rectangle(0, 0, cols, rows)
 shape = predictor(cv2.cvtColor(face, cv2.COLOR_RGB2GRAY), rect)
@@ -114,6 +117,7 @@ kps = list(map(lambda p: (p.x, p.y), shape.parts()))
 landmarks = np.array(kps)
 print(kps)
 plt.imshow(face)
+plt.show()
 plot_landmarks(landmarks)
 
 # Face Alignment Face alignment is an important pre-processing step for face identification. The goal is to transform

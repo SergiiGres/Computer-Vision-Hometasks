@@ -13,9 +13,10 @@ plt.rcParams['figure.figsize'] = [15, 10]
 
 # Let's load an example image.
 
-img = cv2.imread('/home/janko/Pictures/janko2.jpg')
+img = cv2.imread('data/face2.jpg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 plt.imshow(img, cmap='gray')
+plt.show()
 img = img/255
 
 # Regional Sums In face detection, computing the regional pixel sums (for evaluating the Haar basis functions) is a
