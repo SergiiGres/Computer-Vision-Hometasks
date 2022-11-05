@@ -5,7 +5,8 @@ import dlib
 
 plt.rcParams['figure.figsize'] = [15, 10]
 
-img = cv2.imread('data/image2.jpg')
+# img = cv2.imread('data/image2.jpg')
+img = cv2.imread('data/image3.jpg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 plt.imshow(img)
