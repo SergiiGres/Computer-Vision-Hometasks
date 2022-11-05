@@ -5,8 +5,8 @@ import dlib
 
 plt.rcParams['figure.figsize'] = [15, 10]
 
-# img = cv2.imread('data/image2.jpg')
-img = cv2.imread('data/image3.jpg')
+# img = cv2.imread('data/image2.jpg')  # one false detection
+img = cv2.imread('data/image3.jpg')  # no false detections
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 plt.imshow(img)
@@ -21,6 +21,7 @@ rects = detector(gray, 1)
 print('Number of detected faces:', len(rects))
 print(rects)
 print(rects[0].left)
+
 
 def rect_to_bb(rect):
     # Dlib rect --> OpenCV rect
