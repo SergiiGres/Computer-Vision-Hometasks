@@ -18,7 +18,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Load the dataset
-folder = '/home/janko/Projects/robot_dreams/cv/data/datasets/object-detection-crowdai'
+folder = '/Users/sergiigres/PycharmProjects/ComputerVision/Computer-Vision-Hometasks/lesson_10/data/object-detection-crowdai'
 frames = os.listdir(folder)
 
 # Sort (alphabetically) to ensure temporal consecutiveness
@@ -75,9 +75,10 @@ for ii in range(idx, idx + 10):
     # Show the tracker working
     cv2.rectangle(img, (x1, y1), (x1+width, y1+height), (0, 255, 0), 5)
     plt.imshow(img)
-    plt.show(), plt.draw()
-    plt.waitforbuttonpress()
-    plt.clf()
+    plt.show()
+    plt.draw()
+    # plt.waitforbuttonpress()
+    # plt.clf()
     
     # fname = 'frame_' + str(ii).zfill(3) + '.jpg'
     # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Sat Dec 25 17:19:35 2021
@@ -21,7 +21,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Load the dataset
-folder = '/home/janko/Projects/robot_dreams/cv/data/datasets/object-detection-crowdai'
+folder = '/Users/sergiigres/PycharmProjects/ComputerVision/Computer-Vision-Hometasks/lesson_10/data/object-detection-crowdai'
 frames = os.listdir(folder)
 
 boxes = []
@@ -57,17 +57,17 @@ search = 50
 # Genrate tracking template
 img = cv2.imread(os.path.join(folder, frames[idx]))
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-template = img[y1:y2, x1:x2]/255
+template = img[y1:y2, x1:x2] / 255
 
 cnt = 0
 # Tracking loop
 for ii in range(idx, idx + 50):
     img = cv2.imread(os.path.join(folder, frames[ii]))
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)    
-        
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
     # Build local search window
-    search_window = img[y1-search:y2+search, x1-search:x2+search]/255    
-    
+    search_window = img[y1 - search:y2 + search, x1 - search:x2 + search] / 255
+
     # Tracking by minimising simple SAD (sum of absolute differences) loss
     # Equivalent to MSE loss (in **this** case) but faster
     track_x1 = None
@@ -75,31 +75,33 @@ for ii in range(idx, idx + 50):
     loss = 1e6
     for r in range(0, search_window.shape[0] - height):
         for c in range(0, search_window.shape[1] - width):
-            candidate = search_window[r:r+height, c:c+width]
+            candidate = search_window[r:r + height, c:c + width]
             score = np.sum(np.abs(template - candidate))
             if score < loss:
                 loss = score
                 track_x1 = c
-                track_y1 = r                
-                    
-    # Update the bounding box of the tracked object
+                track_y1 = r
+
+                # Update the bounding box of the tracked object
     x1 = x1 - search + track_x1
     y1 = y1 - search + track_y1
     print(x1, y1, width, height)
-    
-    # fname = 'frame_' + str(cnt).zfill(3) + '.jpg'
-    # cv2.imwrite(os.path.join('/home/janko/Projects/robot_dreams/cv/data/tracking/frames', fname),
-    #             cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
+
+    fname = 'frame_' + str(cnt).zfill(3) + '.jpg'
+    cv2.imwrite(os.path.join(
+        '/Users/sergiigres/PycharmProjects/ComputerVision/Computer-Vision-Hometasks/lesson_10/data/tracking',
+        fname),
+                cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
     cnt = cnt + 1
-            
+
     # Show the tracker working
-    cv2.rectangle(img, (x1, y1), (x1+width, y1+height), (0, 255, 0), 2)
-    plt.imshow(img)    
-    
-    plt.show(), plt.draw()    
-    plt.waitforbuttonpress(0.1)
-    plt.clf()
-    
+    cv2.rectangle(img, (x1, y1), (x1 + width, y1 + height), (0, 255, 0), 2)
+    plt.imshow(img)
+
+    plt.show(), plt.draw()
+    # plt.waitforbuttonpress(0.1)
+    # plt.clf()
+
     # boxes.append([x1, y1, width, height])
     # with open('/home/janko/Projects/robot_dreams/cv/data/tracking/sad/boxes.pckl', 'wb') as fid:
     #     pickle.dump(boxes, fid)
